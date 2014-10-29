@@ -36,9 +36,9 @@ public class Magpie4
             response = "Say something, please.";
         }
 
-        else if (findKeyword(statement, "no") >= 0)
+        else if (findKeyword(statement, "I like you") >= 0)
         {
-            response = "Why so negative?";
+            response = "Why do you like me?";
         }
         else if (findKeyword(statement, "mother") >= 0
                 || findKeyword(statement, "father") >= 0
@@ -58,10 +58,10 @@ public class Magpie4
         {
             // Look for a two word (you <something> me)
             // pattern
-            int psn = findKeyword(statement, "you", 0);
+            int psn = findKeyword(statement, "I", 0);
 
             if (psn >= 0
-                    && findKeyword(statement, "me", psn) >= 0)
+                    && findKeyword(statement, "you", psn) >= 0)
             {
                 response = transformYouMeStatement(statement);
             }
@@ -119,10 +119,10 @@ public class Magpie4
                     .length() - 1);
         }
 
-        int psnOfYou = findKeyword (statement, "you", 0);
-        int psnOfMe = findKeyword (statement, "me", psnOfYou + 3);
+        int psnOfYou = findKeyword (statement, "I", 0);
+        int psnOfMe = findKeyword (statement, "you", psnOfYou + 6);
 
-        String restOfStatement = statement.substring(psnOfYou + 3, psnOfMe).trim();
+        String restOfStatement = statement.substring(psnOfYou + 2, psnOfMe).trim();
         return "What makes you think that I " + restOfStatement + " you?";
     }
 
@@ -195,7 +195,7 @@ public class Magpie4
      */
     private String getRandomResponse()
     {
-        final int NUMBER_OF_RESPONSES = 4;
+        final int NUMBER_OF_RESPONSES = 5;
         double r = Math.random();
         int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
         String response = "";
@@ -216,7 +216,6 @@ public class Magpie4
         {
             response = "You don't say.";
         }
-
         return response;
     }
 
